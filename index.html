@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Example early warning dashboard built from the World Bank policy note Between Necessity and Risk: State Owned Enterprises and Fiscal Risk in the Pacific Islands. Independent example, not an official World Bank product.">
+<meta name="description" content="Early warning dashboard built from the figures in the World Bank policy note Between Necessity and Risk: State Owned Enterprises and Fiscal Risk in the Pacific Islands. Independently made; not an official World Bank product.">
 <title>Pacific SOE Fiscal Risk Monitor</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,7 @@
 body { margin: 0; }
 img { max-width: 100%; }
 [hidden] { display: none !important; }
-/* Layout: navy title band, sticky tab bar (one tab shown at a time), then a 12-column panel grid on a light grey ground. Summary first, detail sections next, calculator and trigger rules last. Palette follows World Bank navy #002244 and bright blue #009FDA. */
+/* Layout: navy title band, sticky tab bar (one tab shown at a time), then a 12-column panel grid on a light grey ground. Summary first, detail sections next, calculator and recommendations last. Palette follows World Bank navy #002244 and bright blue #009FDA. */
 :root {
   --bg: #f3f5f8;
   --surface: #ffffff;
@@ -88,7 +88,6 @@ h1, h2, h3 { text-wrap: balance; margin: 0; color: var(--heading); }
 .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
 .meta span { font-size: 12px; color: var(--band-ink-2); background: var(--band-chip); border-radius: 2px; padding: 3px 9px; }
 .meta span b { color: var(--band-ink); font-weight: 600; }
-.meta .example-flag { background: var(--warn); color: #1c2530; font-weight: 600; }
 
 /* nav */
 .secnav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line); }
@@ -282,6 +281,10 @@ g.row:hover .bar.neg { fill: var(--neg); filter: brightness(.9); }
 .tl li.hot .rail::after { background: var(--crit); box-shadow: 0 0 0 2px var(--surface), 0 0 0 3px var(--crit); }
 .tl .what { padding-bottom: 14px; font-size: 13px; }
 .tl .what b { font-weight: 700; }
+.recs { margin: 0; padding-left: 26px; display: grid; gap: 10px; list-style: lower-roman; font-size: 13.5px; }
+.recs li { padding-left: 4px; }
+.recs li::marker { color: var(--accent-strong); font-weight: 700; }
+.recs b { color: var(--heading); }
 
 footer { margin-top: 32px; padding-top: 18px; border-top: 2px solid var(--heading); color: var(--ink-2); font-size: 12.5px; }
 footer h2 { font-size: 14px; margin-bottom: 8px; }
@@ -304,15 +307,15 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; max-width: 1
 
 <header class="band">
   <div class="inner">
-    <div class="eyebrow">Fiscal risk management · Example dashboard</div>
+    <div class="eyebrow">Fiscal risk management · Policy note dashboard</div>
     <h1>Pacific SOE Fiscal Risk Monitor</h1>
-    <p>An example Early Warning System built from the figures published in the World Bank policy note <i>Between Necessity and Risk</i>. The note does not publish SOE-level names, so the calculator presets and trigger rules are illustrative. This is an independent example, not an official World Bank product.</p>
+    <p>An Early Warning System dashboard built from the figures published in the World Bank policy note <i>Between Necessity and Risk</i>. Every figure on this page comes from the note. Independently made; not an official World Bank product.</p>
     <div class="meta">
       <span>Sample <b>83 SOEs · 11 countries</b></span>
       <span>Z″ computed for <b>38 SOEs</b> (2021–2024)</span>
       <span>KPI period <b>2020–2024</b></span>
       <span>Financials excluded</span>
-      <span class="example-flag">▲ Illustrative values are flagged</span>
+      <span>Source <b>World Bank policy note</b></span>
     </div>
   </div>
 </header>
@@ -324,7 +327,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; max-width: 1
       <li><a href="#sectors">Sectors</a></li>
       <li><a href="#countries">Countries</a></li>
       <li><a href="#calculator">Early warning calculator</a></li>
-      <li><a href="#triggers">Trigger rules</a></li>
+      <li><a href="#recommendations">Recommendations</a></li>
     </ul>
   </div>
 </nav>
@@ -336,10 +339,10 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; max-width: 1
     <div class="grid">
       <div class="card s5 hero">
         <div class="hero-label">SOEs in distress or the grey zone</div>
-        <div class="hero-value">39%<small>15 of 38 · about 4 in 10</small></div>
+        <div class="hero-value">39%<small>29% distress + 10% grey zone · 15 of 38 · nearly 4 in 10</small></div>
         <div class="zonebar" role="img" aria-label="Safe 23 (61%), grey zone 4 (10%), distress 11 (29%)">
-          <div style="width:60.5%; background:var(--good)"></div>
-          <div style="width:10.5%; background:var(--warn)"></div>
+          <div style="width:61%; background:var(--good)"></div>
+          <div style="width:10%; background:var(--warn)"></div>
           <div style="width:29%; background:var(--crit)"></div>
         </div>
         <div class="zonelegend">
@@ -352,22 +355,22 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; max-width: 1
 
       <div class="s7 tiles">
         <div class="card tile">
-          <div class="tile-top"><span class="tile-label">Predicted transfers to distressed SOEs</span><span class="st alert"><i>■</i>Alert</span></div>
+          <div class="tile-top"><span class="tile-label">Predicted grants to the most distressed SOEs</span></div>
           <div class="tile-value">21.9%<small>of total assets / year</small></div>
-          <div class="tile-sub">8.4% for healthy SOEs · about 2.6× (Z″ 5th vs 75th percentile)</div>
+          <div class="tile-sub">Z″ at the 5th percentile (−4.7) · 8.4% at the 75th percentile (12.78), so more than double (Figure 10)</div>
         </div>
         <div class="card tile">
-          <div class="tile-top"><span class="tile-label">Utilities debt-to-EBITDA</span><span class="st alert"><i>■</i>Alert</span></div>
+          <div class="tile-top"><span class="tile-label">Utilities debt-to-EBITDA</span></div>
           <div class="tile-value">13.6<small>years</small></div>
-          <div class="tile-sub">Distress threshold is 6 · highest of any sector</div>
+          <div class="tile-sub">Above the note's distress threshold of 6 · highest of any sector</div>
         </div>
         <div class="card tile">
-          <div class="tile-top"><span class="tile-label">Countries with distressed utilities</span><span class="st alert"><i>■</i>Alert</span></div>
+          <div class="tile-top"><span class="tile-label">Countries with distressed utilities</span></div>
           <div class="tile-value">5<small>of 9</small></div>
           <div class="tile-sub">Grey zone 2 · safe 2 (2022–24 Z″)</div>
         </div>
         <div class="card tile">
-          <div class="tile-top"><span class="tile-label">Utilities return on assets</span><span class="st alert"><i>■</i>Alert</span></div>
+          <div class="tile-top"><span class="tile-label">Utilities return on assets</span></div>
           <div class="tile-value">0.4%<small>2022–24</small></div>
           <div class="tile-sub">Down from 3.4% in 2020–21, during the recovery</div>
         </div>
@@ -379,7 +382,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; max-width: 1
   <!-- SECTORS -->
   <section data-tab="sectors" aria-labelledby="h-sectors">
     <div class="sec-head">
-      <div><h2 id="h-sectors">Sector scorecard</h2><p>Each KPI is marked good, watch or alert by GICS sector. Sectors with the most alerts come first.</p></div>
+      <div><h2 id="h-sectors">Sector scorecard</h2><p>Sector averages from the note. A rating appears only where the note states a threshold. Sectors with the most alerts come first.</p></div>
       <div class="chips" role="group" aria-label="Highlight a sector">
         <span class="chips-label">Highlight</span>
         <div class="chips" id="chips"></div>
@@ -390,17 +393,16 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; max-width: 1
         <div class="tbl-wrap">
           <table id="scorecard">
             <thead><tr>
-              <th>Sector</th><th>SOEs</th><th>Footprint<br>assets/GDP</th><th>ROA (%)<br>2022–24</th><th>ROE (%)<br>2022–24</th><th>Current ratio<br>2022–24</th><th>Debt/assets<br>2020–24</th><th>Debt/EBITDA (yrs)<br>2020–24</th><th>Z″<br>2021–24</th><th>Alerts</th>
+              <th>Sector</th><th>SOEs</th><th>Footprint<br>assets/GDP</th><th>ROA (%)<br>2022–24</th><th>ROE (%)<br>2022–24</th><th>Current ratio<br>2020–24</th><th>Debt/assets<br>2020–24</th><th>Debt/EBITDA (yrs)<br>2020–24</th><th>Z″<br>2021–24</th><th>Alerts<br>of 4 rated</th>
             </tr></thead>
             <tbody></tbody>
           </table>
         </div>
         <div class="legend-row">
-          <span><span class="st ok"><i>●</i>Good</span></span>
-          <span><span class="st watch"><i>▲</i>Watch</span></span>
-          <span><span class="st alert"><i>■</i>Alert</span></span>
-          <span class="lt"><b>Thresholds from the note</b>: Z″ &lt; 1.1 alert, 1.1–2.6 watch · debt/EBITDA &gt; 6 alert, 4–6 watch · debt/assets &gt; 0.5 alert, 0.5 watch</span>
-          <span class="lt"><b>Illustrative thresholds</b>: ROA below 1% alert, drop of 2 pp or more watch · negative ROE alert, falling ROE watch · current ratio below 1 alert, below 3.5 or halved watch</span>
+          <span><span class="st ok"><i>●</i>Safe / low</span></span>
+          <span><span class="st watch"><i>▲</i>Grey zone / elevated</span></span>
+          <span><span class="st alert"><i>■</i>Distress / breach</span></span>
+          <span class="lt"><b>Ratings use only thresholds stated in the note</b>: Z″ below 1.1 distress (■), 1.1–2.6 grey zone (▲), above 2.6 safe (●) · debt/EBITDA above 6 is the distress threshold (■), above 4 elevated leverage (▲), below 4 low to moderate (●); negative EBITDA means debt cannot be serviced from operations (■) · current ratio below 1 means current liabilities exceed current assets (■) · debt/assets above 0.5 means more than half of assets are debt-financed (■). The note sets no thresholds for footprint, ROA or ROE, so these are shown without a rating.</span>
           <span class="lt">— not reported in the note · DISC is a single SOE in the Marshall Islands</span>
         </div>
       </div>
@@ -417,7 +419,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; max-width: 1
 
       <div class="card s5">
         <div class="card-head">
-          <div><h3>Change in profitability</h3><p class="sub">COVID shock (2020–21) to recovery (2022–24) · sectors the note reports</p></div>
+          <div><h3>Change in profitability</h3><p class="sub">COVID shock (2020–21) to recovery (2022–24) · sectors with a value for both periods in the note</p></div>
           <button class="btn-ghost" data-toggle="dumb" aria-expanded="false">Show table</button>
         </div>
         <div class="legend-row" style="margin:0 0 8px">
@@ -472,24 +474,23 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; max-width: 1
     <div class="sec-head"><div><h2 id="h-calc">Early warning calculator and stress test</h2><p>Enter four financial ratios to get the Z″ score and zone, and the next year's predicted grants from Equation (1). The shock sliders apply the note's external-shock coefficients.</p></div></div>
     <div class="grid">
       <div class="card s5">
-        <div class="card-head"><div><h3>SOE financial ratios</h3><p class="sub">Presets are hypothetical example SOEs</p></div></div>
-        <div class="presets" role="group" aria-label="Example presets">
-          <button class="preset" data-preset="median" aria-pressed="true">Sample median ratios</button>
-          <button class="preset" data-preset="grey" aria-pressed="false">Grey zone example</button>
-          <button class="preset" data-preset="distress" aria-pressed="false">Distress example</button>
+        <div class="card-head"><div><h3>SOE financial ratios</h3><p class="sub">Starts at the sample medians in the note's Table 1. Type your own SOE's ratios to replace them.</p></div></div>
+        <div class="presets" role="group" aria-label="Starting values">
+          <button class="preset" data-preset="median" aria-pressed="true">Reset to sample medians (Table 1)</button>
         </div>
         <div class="fields">
           <div class="field"><label for="x1">Working capital / total assets<small>X1 · short-term liquidity buffer</small></label><input id="x1" type="number" step="0.01"></div>
           <div class="field"><label for="x2">Retained earnings / total assets<small>X2 · cumulative profitability</small></label><input id="x2" type="number" step="0.01"></div>
           <div class="field"><label for="x3">EBIT / total assets<small>X3 · operating efficiency</small></label><input id="x3" type="number" step="0.01"></div>
           <div class="field"><label for="x4">Book equity / total liabilities<small>X4 · leverage</small></label><input id="x4" type="number" step="0.01"></div>
-          <div class="field"><label for="assets">Total assets (USD million)<small>Converts the grant share to dollars</small></label><input id="assets" type="number" step="1" min="0"></div>
+          <div class="field"><label for="assets">Total assets (USD million, optional)<small>Leave blank to see the share of assets only</small></label><input id="assets" type="number" step="1" min="0" placeholder="—"></div>
         </div>
+        <p class="note">Each default is the median of that ratio in Table 1. Combined, they give a Z″ of about 3.06, which is not the note's median Z″ (7.69), because the medians come from different SOEs.</p>
         <hr class="divider">
         <div class="card-head" style="margin-bottom:8px"><div><h3>Contribution to Z″</h3><p class="sub">Z″ = 6.56·X1 + 3.26·X2 + 6.72·X3 + 1.05·X4</p></div></div>
         <div class="contrib" id="contrib"></div>
         <hr class="divider">
-        <div class="card-head" style="margin-bottom:8px"><div><h3>External shocks</h3><p class="sub">Coefficients from regressions controlling for SOE size, GDP growth, and country and sector fixed effects</p></div></div>
+        <div class="card-head" style="margin-bottom:8px"><div><h3>External shocks</h3><p class="sub">Coefficients from the note's regressions (Figure 13), which control for SOE size, GDP growth, and country and sector fixed effects</p></div></div>
         <div class="fields">
           <div class="slider">
             <div class="slider-top"><label for="dis">Increase in disaster intensity index</label><output id="dis-o" for="dis">0</output></div>
@@ -499,9 +500,9 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; max-width: 1
           <div class="slider">
             <div class="slider-top"><label for="fx">Depreciation (rise in LCU per USD)</label><output id="fx-o" for="fx">0</output></div>
             <input id="fx" type="range" min="0" max="5" step="0.1" value="0">
-            <small>Z″ −0.37 per unit · one unit means different things for each currency, so treat as illustrative · not applicable to USD users (PLW, FSM, MHL)</small>
+            <small>Z″ −0.37 per unit, where one unit is one local currency unit per US dollar · not applicable to USD users (PLW, FSM, MHL)</small>
           </div>
-          <p class="note" style="margin:0">Terms of trade has a positive but statistically insignificant coefficient, so it is left out.</p>
+          <p class="note" style="margin:0">Terms of trade has a positive but statistically insignificant coefficient in the note, so it is left out. The note estimates the shock effects and Equation (1) separately; the "after stress" result applies both of the note's coefficients in turn and is not a figure reported in the note.</p>
         </div>
       </div>
 
@@ -538,35 +539,45 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; max-width: 1
         <p class="note">The coefficient is a <b>predictive relationship</b> significant at the 10% level, not a causal effect. Above a Z″ of about 23.7 the equation turns negative, so the dashboard shows 0%.</p>
       </div>
     </div>
-    <p class="next"><a href="#triggers">Next: Trigger rules →</a></p>
+    <p class="next"><a href="#recommendations">Next: Policy recommendations →</a></p>
   </section>
 
-  <!-- TRIGGERS -->
-  <section data-tab="triggers" aria-labelledby="h-trig">
-    <div class="sec-head"><div><h2 id="h-trig">Fiscal trigger rules</h2><p>Example rules that make the note's recommendation (ii), fiscal triggers linked to SOE financial health, concrete.</p></div></div>
+  <!-- RECOMMENDATIONS -->
+  <section data-tab="recommendations" aria-labelledby="h-recs">
+    <div class="sec-head"><div><h2 id="h-recs">Policy recommendations</h2><p>The note's five recommendations, the thresholds it uses to flag distress, and the Air Vanuatu case from Box 1.</p></div></div>
     <div class="grid">
       <div class="card s7">
+        <div class="card-head"><div><h3>Five recommendations</h3><p class="sub">From the note's conclusion</p></div></div>
+        <ol class="recs">
+          <li><b>Quantify and budget for SOE contingent liabilities</b> as explicit line items in national fiscal frameworks, moving beyond ad hoc bailouts toward transparent fiscal provisioning.</li>
+          <li><b>Establish fiscal triggers linked to SOE financial health</b>, using the Early Warning System Z-score thresholds to activate pre-agreed intervention protocols before distress becomes a fiscal crisis.</li>
+          <li><b>Introduce explicit community service obligation (CSO) compensation</b>, replacing untransparent subsidies with budgeted transfers to improve fiscal accountability and SOE incentives.</li>
+          <li><b>Integrate exchange rate and natural disaster stress-testing</b> into SOE fiscal oversight, since these shocks are the dominant external drivers of SOE distress and fiscal injections.</li>
+          <li><b>Build countercyclical fiscal buffers.</b> Sovereign rent-led economies: buffers built in good years and earmarked for SOE shocks. Tourism and remittance-led economies: contingent financing such as catastrophe deferred drawdown options and sovereign parametric insurance (for example through the Pacific Catastrophe Risk Insurance Company).</li>
+        </ol>
+        <p class="note">The note adds that these reforms will need sustained technical assistance and capacity building from development partners. Its proposed Early Warning System combines the Altman Z-score, sector-specific KPIs and the macro vulnerability indicators from the shock analysis.</p>
+        <hr class="divider">
+        <div class="card-head"><div><h3>Thresholds the note uses</h3><p class="sub">The same thresholds rate the sector scorecard</p></div></div>
         <div class="tbl-wrap">
           <table>
-            <thead><tr><th>Signal</th><th>Condition</th><th>Pre-agreed action (example)</th></tr></thead>
+            <thead><tr><th>Indicator</th><th>Threshold</th><th>Meaning in the note</th></tr></thead>
             <tbody>
-              <tr><td><span class="st alert"><i>■</i>Alert</span></td><td>Z″ &lt; 1.1 (distress)</td><td>Activate the intervention protocol · require a restructuring plan · budget the expected grants explicitly for next year</td></tr>
-              <tr><td><span class="st alert"><i>■</i>Alert</span></td><td>Debt/EBITDA &gt; 6 years</td><td>Prior approval for new borrowing and guarantees · review tariffs and CSO compensation</td></tr>
-              <tr><td><span class="st alert"><i>■</i>Alert</span></td><td>Stress test drops the SOE one zone or more</td><td>Record the contingent liability in the fiscal risk statement · consider disaster risk financing such as a Cat DDO</td></tr>
-              <tr><td><span class="st watch"><i>▲</i>Watch</span></td><td>1.1 ≤ Z″ ≤ 2.6 (grey zone)</td><td>Quarterly financial monitoring · require a performance improvement plan</td></tr>
-              <tr><td><span class="st watch"><i>▲</i>Watch</span></td><td>Financial statements filed more than 180 days after year end</td><td>Disclosure warning · consider withholding transfers</td></tr>
-              <tr><td><span class="st ok"><i>●</i>Good</span></td><td>Z″ &gt; 2.6 and no other alerts</td><td>Routine annual monitoring</td></tr>
+              <tr><td>Altman Z″</td><td><span class="st alert"><i>■</i>below 1.1</span></td><td>Distress</td></tr>
+              <tr><td>Altman Z″</td><td><span class="st watch"><i>▲</i>1.1 to 2.6</span></td><td>Grey zone (vulnerable)</td></tr>
+              <tr><td>Altman Z″</td><td><span class="st ok"><i>●</i>above 2.6</span></td><td>Safe</td></tr>
+              <tr><td>Debt/EBITDA</td><td>below 2 · 2–4 · above 4 · above 6</td><td>Low risk · moderate · elevated leverage · distress threshold</td></tr>
+              <tr><td>Current ratio</td><td>below 1</td><td>Current liabilities exceed current assets</td></tr>
+              <tr><td>Debt/assets</td><td>above 0.5</td><td>More than half of assets are debt-financed</td></tr>
             </tbody>
           </table>
         </div>
-        <p class="note">The 180-day threshold is illustrative. Air Vanuatu filed an average of 280 days late, so the government could not see its exposure in time.</p>
       </div>
 
       <div class="card s5">
         <div class="card-head"><div><h3>Case: Air Vanuatu</h3><p class="sub">How a contingent liability became real (Box 1)</p></div></div>
         <ol class="tl">
           <li><span class="when">2021</span><span class="rail"></span><div class="what">IMF–World Bank DSA flags contingent liabilities of <b>up to 22% of GDP</b> under a combined stress scenario</div></li>
-          <li><span class="when">Pre-2024</span><span class="rail"></span><div class="what">Financial statements filed on average <b>280 days</b> after year end</div></li>
+          <li><span class="when">Reporting</span><span class="rail"></span><div class="what">Financial statements filed on average <b>280 days</b> after year end</div></li>
           <li class="hot"><span class="when">May 2024</span><span class="rail"></span><div class="what">Voluntary liquidation of the sole international and domestic carrier</div></li>
           <li class="hot"><span class="when">2024</span><span class="rail"></span><div class="what">Secured debt assumed at <b>about 2% of GDP</b>, restructuring costs of <b>2.3%</b>. Deficit rises from about 3% projected to <b>6.7%</b>; growth revised down 2 pp</div></li>
           <li><span class="when">After</span><span class="rail"></span><div class="what">Restructured into AV3 Limited. Debt absorbed into public debt, with ongoing operating subsidies</div></li>
@@ -583,7 +594,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; max-width: 1
       <li>The Z″ analysis covers 38 of 83 SOEs (46%), and only 14 SOEs have 2024 statements. Some balance sheet data were estimated.</li>
       <li>The transfer regression uses 99 observations, a coefficient of −0.767 (significant at 10%), and country and sector fixed effects. The note's Figure 10 value (21.9%) includes fixed effects and differs slightly from the plain Equation (1) result (21.8%).</li>
       <li>Inconsistency in the note: the summary says 5 of 11 utility SOEs are in distress, while the main text says 5 of 9 countries. This dashboard follows the main text (countries).</li>
-      <li>Calculator presets, the illustrative thresholds and the trigger rules are hypothetical values for demonstration.</li>
+      <li>Scorecard ratings use only thresholds stated in the note. The calculator applies the note's published coefficients (Z″ weights, Equation (1) and the shock estimates) to the ratios entered, starting from the sample medians in Table 1.</li>
     </ul>
   </footer>
 </div>
@@ -622,32 +633,32 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; max-width: 1
   /* ---------- data (all from the policy note) ---------- */
   const SECTORS = [
     { s: "UTIL", name: "Utilities", n: 13, gdp: { v: "14%" },
-      roa: { v: "0.4", d: "3.4 → 0.4", st: "alert" }, roe: { v: "−12", d: "6 → −12", st: "alert" },
-      cr: { v: "2.4–3.3", d: "full period 2.8", st: "watch" }, da: { v: "0.4", st: "ok" },
-      de: { v: "13.6", st: "alert" }, z: { v: "5.0", d: "likely overstated", st: "ok" } },
+      roa: { v: "0.4", d: "3.4 → 0.4" }, roe: { v: "−12", d: "6 → −12" },
+      cr: { v: "2.4–3.3", d: "range across periods · full period 2.8" }, da: { v: "0.4" },
+      de: { v: "13.6", st: "alert" }, z: { v: "5.0", d: "note: interpret with caution", st: "ok" } },
     { s: "DISC", name: "Consumer Disc.", n: 1, fn: "1 SOE", gdp: { v: "≈1%" },
-      roa: { v: "—" }, roe: { v: "−62", d: "2020–21 · 2022–24 n/a", st: "alert" },
-      cr: { v: "≈0", st: "alert" }, da: { v: "0.9", st: "alert" },
+      roa: { v: "—" }, roe: { v: "—", d: "2020–21: −62 · 2022–24 not given" },
+      cr: { v: "≈0", d: "2022–24", st: "alert" }, da: { v: "0.9", st: "alert" },
       de: { v: "n/a", d: "negative EBITDA", st: "alert" }, z: { v: "≈−5", st: "alert" } },
     { s: "ENRG", name: "Energy", n: 3, gdp: { v: "16%" },
-      roa: { v: "1.3", d: "5.0 → 1.3", st: "watch" }, roe: { v: "—" },
-      cr: { v: "2.7–3.5", d: "range across periods", st: "watch" }, da: { v: "0.3", st: "ok" },
+      roa: { v: "1.3", d: "5.0 → 1.3" }, roe: { v: "—" },
+      cr: { v: "2.7–3.5", d: "range across periods" }, da: { v: "≈0.3" },
       de: { v: "6.5", st: "alert" }, z: { v: "7.5", st: "ok" } },
     { s: "INDUS", name: "Industrials", n: 24, gdp: { v: "—" },
-      roa: { v: "—" }, roe: { v: "−7", d: "−1 → −7", st: "alert" },
-      cr: { v: "≈6", d: "stable", st: "ok" }, da: { v: "0.3", st: "ok" },
+      roa: { v: "—" }, roe: { v: "−7", d: "−1 → −7" },
+      cr: { v: "≈6", d: "stable" }, da: { v: "≈0.3" },
       de: { v: "—" }, z: { v: "33.2", st: "ok" } },
     { s: "COMMS", name: "Communications", n: 11, gdp: { v: "—" },
-      roa: { v: "≈1.6", d: "stable at ~1.5–1.6", st: "ok" }, roe: { v: "7", d: "15 → 7", st: "watch" },
-      cr: { v: "6.2", d: "21.5 → 6.2", st: "watch" }, da: { v: "0.3", st: "ok" },
+      roa: { v: "≈1.5–1.6", d: "stable" }, roe: { v: "7", d: "≈15 → 7" },
+      cr: { v: "6.2", d: "21.5 → 6.2" }, da: { v: "≈0.3" },
       de: { v: "4.8", st: "watch" }, z: { v: "11.0", st: "ok" } },
     { s: "STPL", name: "Consumer Staples", n: 12, gdp: { v: "≈1%" },
-      roa: { v: "8.1", d: "7.3 → 8.1", st: "ok" }, roe: { v: "—" },
-      cr: { v: "≈35", d: "stable", st: "ok" }, da: { v: "0.5", st: "watch" },
+      roa: { v: "8.1", d: "7.3 → 8.1" }, roe: { v: "—" },
+      cr: { v: "≈35", d: "stable" }, da: { v: "0.5" },
       de: { v: "—" }, z: { v: "12.3", st: "ok" } },
     { s: "REIT", name: "Real Estate", n: 7, gdp: { v: "—" },
       roa: { v: "—" }, roe: { v: "—" },
-      cr: { v: "≈26", d: "stable", st: "ok" }, da: { v: "0.3", st: "ok" },
+      cr: { v: "≈26", d: "stable" }, da: { v: "≈0.3" },
       de: { v: "0.4", st: "ok" }, z: { v: "37.5", st: "ok" } },
   ];
   const ZSECT = [
@@ -658,7 +669,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; max-width: 1
   ];
   const ROA = [
     { s: "STPL", a: 7.3, b: 8.1 }, { s: "ENRG", a: 5.0, b: 1.3 },
-    { s: "UTIL", a: 3.4, b: 0.4 }, { s: "COMMS", a: 1.5, b: 1.6, note: "Note reports ~1.5–1.6%" },
+    { s: "UTIL", a: 3.4, b: 0.4 },
   ];
   const ROE = [
     { s: "COMMS", a: 15, b: 7, note: "2020–21 reported as ~15%" }, { s: "UTIL", a: 6, b: -12 }, { s: "INDUS", a: -1, b: -7 },
@@ -674,16 +685,16 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; max-width: 1
   };
   const COUNTRIES = [
     { c: "KIR", name: "Kiribati", own: "Dual", eco: "Sovereign rent", n: 22, gdp: "max above 50%", gr: "16% → 15%", uz: { v: "53.3", st: "ok" } },
-    { c: "MHL", name: "Marshall Islands", own: "Centralized", eco: "Sovereign rent", n: 9, gdp: "—", gr: "38% → 35%", grSt: "alert", uz: { v: "1.7", st: "watch", d: "full period 4.7" } },
-    { c: "FSM", name: "Micronesia", own: "Unknown", eco: "Sovereign rent", n: 5, gdp: "—", gr: "↑ rising", grSt: "watch", uz: { v: "—" } },
+    { c: "MHL", name: "Marshall Islands", own: "Centralized", eco: "Sovereign rent", n: 9, gdp: "—", gr: "38% → 35%", grD: "most transfer-dependent", uz: { v: "1.7", st: "watch", d: "full period 4.7" } },
+    { c: "FSM", name: "Micronesia", own: "Unknown", eco: "Sovereign rent", n: 5, gdp: "—", gr: "↑ increase", grD: "warrants close monitoring", uz: { v: "—" } },
     { c: "NRU", name: "Nauru", own: "Dual", eco: "Sovereign rent*", n: 1, gdp: "about 30%", gr: "—", uz: { v: "—" } },
-    { c: "WSM", name: "Samoa", own: "Centralized", eco: "Tourism & remittance", n: 4, gdp: "—", gr: "↑ rising", grSt: "watch", uz: { v: "near/below threshold", st: "alert" } },
-    { c: "TON", name: "Tonga", own: "Centralized", eco: "Tourism & remittance", n: 5, gdp: "—", gr: "↓ falling", uz: { v: "near/below threshold", st: "alert" } },
+    { c: "WSM", name: "Samoa", own: "Centralized", eco: "Tourism & remittance", n: 4, gdp: "—", gr: "↑ increase", grD: "warrants close monitoring", uz: { v: "not given", d: "below or near distress threshold" } },
+    { c: "TON", name: "Tonga", own: "Centralized", eco: "Tourism & remittance", n: 5, gdp: "—", gr: "↓ decline", uz: { v: "not given", d: "below or near distress threshold" } },
     { c: "VUT", name: "Vanuatu", own: "Decentralized", eco: "Tourism & remittance", n: 6, gdp: "—", gr: "—", uz: { v: "—" } },
     { c: "SLB", name: "Solomon Islands", own: "Dual", eco: "Tourism & remittance*", n: 8, gdp: "—", gr: "—", uz: { v: "10.2", st: "ok" } },
-    { c: "FJI", name: "Fiji", own: "Centralized", eco: "Not classified", n: 12, gdp: "—", gr: "—", uz: { v: "near/below threshold", st: "alert" } },
-    { c: "PLW", name: "Palau", own: "Decentralized", eco: "Not classified", n: 3, gdp: "about 21%", gr: "↓ falling", uz: { v: "0.8", st: "alert" } },
-    { c: "PNG", name: "Papua New Guinea", own: "Centralized", eco: "Not classified", n: 8, gdp: "about 2%", gr: "≈0%", uz: { v: "−0.3", st: "alert" } },
+    { c: "FJI", name: "Fiji", own: "Centralized", eco: "Not classified", n: 12, gdp: "—", gr: "—", uz: { v: "not given", d: "below or near distress threshold" } },
+    { c: "PLW", name: "Palau", own: "Decentralized", eco: "Not classified", n: 3, gdp: "about 21%", gr: "↓ decline", uz: { v: "0.8", st: "alert" } },
+    { c: "PNG", name: "Papua New Guinea", own: "Centralized", eco: "Not classified", n: 8, gdp: "about 2%", gr: "≈0%", grD: "coverage, size of economy", uz: { v: "−0.3", st: "alert" } },
   ];
 
   /* ---------- tooltip ---------- */
@@ -755,7 +766,8 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; max-width: 1
   (function buildScorecard() {
     const tb = $("#scorecard tbody");
     const keys = ["roa", "roe", "cr", "da", "de", "z"];
-    const rows = SECTORS.map((r) => ({ r, alerts: keys.filter((k) => r[k].st === "alert").length }));
+    const rated = ["cr", "da", "de", "z"];  // the only KPIs with a threshold in the note
+    const rows = SECTORS.map((r) => ({ r, alerts: rated.filter((k) => r[k].st === "alert").length }));
     rows.sort((a, b) => b.alerts - a.alerts);
     for (const { r, alerts } of rows) {
       const tr = htmlEl("tr", { "data-s": r.s });
@@ -770,9 +782,9 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; max-width: 1
       const fc = htmlEl("td");
       const w = htmlEl("span", { class: "flagcount" });
       const pips = htmlEl("span", { class: "pips", "aria-hidden": "true" });
-      for (let i = 0; i < 6; i++) pips.appendChild(htmlEl("span", { class: i < alerts ? "on" : "" }));
+      for (let i = 0; i < rated.length; i++) pips.appendChild(htmlEl("span", { class: i < alerts ? "on" : "" }));
       w.appendChild(pips);
-      w.appendChild(document.createTextNode(alerts + " / 6"));
+      w.appendChild(document.createTextNode(alerts + " / " + rated.length));
       fc.appendChild(w);
       tr.appendChild(fc);
       tb.appendChild(tr);
@@ -792,7 +804,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; max-width: 1
       tr.appendChild(htmlEl("td", {}, c.eco));
       tr.appendChild(htmlEl("td", {}, String(c.n)));
       tr.appendChild(metricCell({ v: c.gdp }));
-      tr.appendChild(metricCell({ v: c.gr, st: c.grSt }));
+      tr.appendChild(metricCell({ v: c.gr, d: c.grD }));
       tr.appendChild(metricCell(c.uz));
       tb.appendChild(tr);
     }
@@ -960,10 +972,9 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; max-width: 1
   buildTable("diff-table", ["Sector", "Z″ gap (points)"], DIFF.map((d) => [d.name, "+" + fmt(d.v)]));
 
   /* ---------- calculator ---------- */
+  // Sample medians from the note's Table 1 (the only starting values used)
   const PRESETS = {
-    median: { x1: 0.133, x2: 0.108, x3: 0.022, x4: 1.61, assets: 50 },
-    grey: { x1: 0.05, x2: 0.02, x3: 0.01, x4: 1.2, assets: 50 },
-    distress: { x1: -0.10, x2: -0.30, x3: -0.05, x4: 0.20, assets: 50 },
+    median: { x1: 0.133, x2: 0.108, x3: 0.022, x4: 1.61 },
   };
   const COEF = { x1: 6.56, x2: 3.26, x3: 6.72, x4: 1.05 };
   const LABELS = { x1: "6.56 × WC/TA", x2: "3.26 × RE/TA", x3: "6.72 × EBIT/TA", x4: "1.05 × Equity/TL" };
@@ -973,7 +984,8 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; max-width: 1
 
   function readInputs() {
     const g = (id) => { const n = parseFloat($("#" + id).value); return Number.isFinite(n) ? n : 0; };
-    return { x1: g("x1"), x2: g("x2"), x3: g("x3"), x4: g("x4"), assets: Math.max(0, g("assets")) };
+    const a = parseFloat($("#assets").value);
+    return { x1: g("x1"), x2: g("x2"), x3: g("x3"), x4: g("x4"), assets: Number.isFinite(a) && a > 0 ? a : null };
   }
   function stChip(z) {
     const k = zoneOf(z);
@@ -1017,22 +1029,22 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; max-width: 1
     const pb = pct(z), ps = pct(zs);
     $("#injBase").textContent = fmt(pb) + "% of total assets";
     $("#injStr").textContent = fmt(ps) + "% of total assets";
-    $("#amtBase").textContent = usd(v.assets * pb / 100);
-    $("#amtStr").textContent = usd(v.assets * ps / 100);
-
-    const dAmt = v.assets * (ps - pb) / 100;
+    const hasAssets = v.assets !== null;
+    $("#amtBase").textContent = hasAssets ? usd(v.assets * pb / 100) : "— (enter total assets)";
+    $("#amtStr").textContent = hasAssets ? usd(v.assets * ps / 100) : "— (enter total assets)";
     const delta = $("#delta");
     delta.replaceChildren();
     if (dis === 0 && fx === 0) {
       delta.style.background = "var(--surface-2)";
-      delta.appendChild(document.createTextNode("Move a shock slider to see the extra fiscal burden after stress."));
+      delta.appendChild(document.createTextNode("Move a shock slider to see how the note's shock estimates change Z″ and predicted grants."));
     } else {
       delta.style.background = "";
       delta.appendChild(document.createTextNode("Shocks change Z″ by "));
       delta.appendChild(htmlEl("b", {}, fmt(dz, 2)));
-      delta.appendChild(document.createTextNode(" · extra fiscal burden "));
-      delta.appendChild(htmlEl("b", {}, "+" + usd(dAmt) + " (+" + fmt(ps - pb) + " pp)"));
-      if (zoneOf(zs) !== zoneOf(z)) delta.appendChild(document.createTextNode(" · zone drops, so trigger rule 3 applies"));
+      delta.appendChild(document.createTextNode(" · predicted grants rise by "));
+      const extra = "+" + fmt(ps - pb) + " pp of total assets" + (hasAssets ? " (+" + usd(v.assets * (ps - pb) / 100) + ")" : "");
+      delta.appendChild(htmlEl("b", {}, extra));
+      if (zoneOf(zs) !== zoneOf(z)) delta.appendChild(document.createTextNode(" · zone moves from " + ZLABEL[zoneOf(z)].toLowerCase() + " to " + ZLABEL[zoneOf(zs)].toLowerCase()));
     }
 
     const k = zoneOf(z);
@@ -1041,7 +1053,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; max-width: 1
     sum.appendChild(htmlEl("b", {}, ZLABEL[k].toLowerCase()));
     sum.appendChild(document.createTextNode(` zone (Z″ ${fmt(z, 2)}). Equation (1) predicts grants of `));
     sum.appendChild(htmlEl("b", {}, fmt(pb) + "%"));
-    sum.appendChild(document.createTextNode(` of total assets next year, about ${usd(v.assets * pb / 100)}.` + (injection(z) < 0 ? " (The equation gives a negative value, shown as 0%.)" : "")));
+    sum.appendChild(document.createTextNode(" of total assets next year" + (hasAssets ? `, about ${usd(v.assets * pb / 100)}` : "") + "." + (injection(z) < 0 ? " (The equation gives a negative value, shown as 0%.)" : "")));
 
     renderCurve();
   }
@@ -1137,7 +1149,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; max-width: 1
 
   /* ---------- tabs: one section at a time, each with its own link (#sectors, #calculator, ...) ---------- */
   const TAB_TITLES = { overview: "Overview", sectors: "Sectors", countries: "Countries",
-    calculator: "Early warning calculator", triggers: "Trigger rules" };
+    calculator: "Early warning calculator", recommendations: "Recommendations" };
   const navLinks = [...document.querySelectorAll(".secnav a")];
   const sections = [...document.querySelectorAll("section[data-tab]")];
   function showTab(scrollToTabs) {
